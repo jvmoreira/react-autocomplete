@@ -10,6 +10,15 @@ module.exports = {
     filename: '[fullhash].js',
     path: path.resolve(process.cwd(), 'dist'),
   },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
   devServer: {
     hot: true,
     port: 3000,
