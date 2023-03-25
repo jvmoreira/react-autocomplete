@@ -10,6 +10,7 @@ module.exports = {
     filename: '[fullhash].js',
     path: path.resolve(process.cwd(), 'dist'),
   },
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.css', '.scss'],
   },
