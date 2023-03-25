@@ -10,6 +10,9 @@ module.exports = {
     filename: '[fullhash].js',
     path: path.resolve(process.cwd(), 'dist'),
   },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx'],
+  },
   module: {
     rules: [
       {
