@@ -1,0 +1,16 @@
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*, :before, :after {
+  margin: inherit;
+  padding: inherit;
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
