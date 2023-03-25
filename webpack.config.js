@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(process.cwd(), 'dist'),
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx', '.css', '.scss'],
   },
   module: {
     rules: [
@@ -19,6 +19,15 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.scss$/,
+        exclude: /\.module.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.module\.scss$/,
+        use: ['style-loader', { loader: 'css-loader', options: { modules: true } }, 'sass-loader'],
       },
     ],
   },
