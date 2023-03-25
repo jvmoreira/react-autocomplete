@@ -1,0 +1,56 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "ignorePatterns": ["dist/*"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:eslint-plugin-react/recommended",
+    "plugin:eslint-plugin-react-hooks/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "quotes": ["error", "single"],
+    "semi": "off",
+    "@typescript-eslint/semi": ["error", "always"],
+    "no-trailing-spaces": ["error"],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "eol-last": ["error", "always"],
+    "linebreak-style": ["error", "unix"],
+    "no-multiple-empty-lines": ["error", {
+      "max": 2,
+      "maxEOF": 1,
+      "maxBOF": 0
+    }],
+    "comma-dangle": "off",
+    "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", {
+      "vars": "all",
+      "args": "after-used",
+      "ignoreRestSiblings": false
+    }],
+    "@typescript-eslint/explicit-function-return-type": ["error", {
+      "allowExpressions": true
+    }],
+    "@typescript-eslint/member-delimiter-style": ["error", {
+      "overrides": {
+        "typeLiteral": {
+          "singleline": { "delimiter": "comma" },
+          "multiline": { "delimiter": "comma" }
+        }
+      }
+    }]
+  }
+}
