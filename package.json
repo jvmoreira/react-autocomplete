@@ -4,6 +4,8 @@
   "version": "0.0.1",
   "description": "React Autocomplete Input Field",
   "scripts": {
+    "start": "NODE_ENV=development webpack serve",
+    "build": "NODE_ENV=production webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm run lint:eslint",
     "lint:eslint:fix": "npm run lint:eslint -- --fix",
@@ -21,6 +23,10 @@
     "eslint": "^8.36.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "typescript": "^4.9.5"
+    "html-webpack-plugin": "^5.5.0",
+    "typescript": "^4.9.5",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.1"
   }
 }
