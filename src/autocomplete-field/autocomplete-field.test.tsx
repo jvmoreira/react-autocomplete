@@ -1,5 +1,7 @@
 import React from 'react';
 import { fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
+import { AutocompleteFetcher } from '@/lib/autocomplete-fetcher';
+import { buildStringHighlight } from '@/lib/string-highlight';
 import { staticCarMakerAutocompleteFetcher } from '@/lib/autocomplete-fetcher/static-car-maker-autocomplete-fetcher';
 import { AutocompleteField } from './autocomplete-field';
 
@@ -20,6 +22,32 @@ test('updates input value and clears options when user selects an autocomplete o
   const listItem = getByRole('listitem');
   fireEvent.click(listItem);
   expect(getByPlaceholderText(autocompleteFieldPlaceholder)).toHaveValue(expectedFinalValue);
+  expect(getByRole('list')).toBeEmptyDOMElement();
+});
+
+test('flushes options when fetcher throws an error', async () => {
+  const searchValue = 'value';
+  const fetcherWithError = getFetcherWithErrorAfterFirstCall(searchValue);
+
+  const result = render(<AutocompleteField placeholder={autocompleteFieldPlaceholder} fetcher={fetcherWithError} />);
+  const { getByRole, getByPlaceholderText } = result;
+
+  const inputField = getByPlaceholderText(autocompleteFieldPlaceholder);
+  fireEvent.change(inputField, { target: { value: searchValue } });
+
+  await waitFor(() => {
+    expect(getByRole('list')).not.toBeEmptyDOMElement();
+  });
+
+  expect(inputField).toHaveValue(searchValue);
+  const newSearchValue = 'new-value';
+  fireEvent.change(inputField, { target: { value: newSearchValue } });
+
+  await waitFor(() => {
+    expect(fetcherWithError).toHaveBeenCalledTimes(2);
+  });
+
+  expect(inputField).toHaveValue(newSearchValue);
   expect(getByRole('list')).toBeEmptyDOMElement();
 });
 
@@ -88,4 +116,23 @@ function renderAutocompleteField(): RenderResult {
       fetcher={staticCarMakerAutocompleteFetcher}
     />,
   );
+}
+
+function getFetcherWithErrorAfterFirstCall(searchValue: string): AutocompleteFetcher {
+  let firstCall = true;
+
+  return jest.fn(() => {
+    if (!firstCall) {
+      return Promise.reject(new Error('Failed to fetch'));
+    }
+
+    firstCall = false;
+    return Promise.resolve([{
+      key: searchValue,
+      value: searchValue,
+      highlightedValue: buildStringHighlight(searchValue, searchValue),
+      description: undefined,
+      highlightedDescription: undefined,
+    }]);
+  });
 }

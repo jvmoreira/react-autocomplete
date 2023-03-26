@@ -36,9 +36,14 @@ function useDispatchSetOptionsWithDebounce(debounceTime: number): (searchedValue
   return useMemo(() => {
     return debounce(async (searchedValue: string) => {
       dispatch(setLoading(true));
-      const options = await fetcher(searchedValue);
-      dispatch(setOptions({ options, searchedValue }));
-      dispatch(setLoading(false));
+      try {
+        const options = await fetcher(searchedValue);
+        dispatch(setOptions({ options, searchedValue }));
+      } catch (e) {
+        dispatch(setOptions({ options: [], searchedValue }));
+      } finally {
+        dispatch(setLoading(false));
+      }
     }, debounceTime);
   }, [debounceTime, dispatch, fetcher]);
 }

@@ -3,6 +3,10 @@ import { buildStringHighlight, StringHighlight } from '../string-highlight';
 import { AutocompleteOption } from './autocomplete-fetcher';
 
 export async function getNpmPackageNameAutocompleteOptions(packageName: string): Promise<AutocompleteOption[]> {
+  if (packageName.length === 0) {
+    return [];
+  }
+
   const searchResult = await npmRegistryApi.search(packageName);
 
   const filteredPackages = searchResult.objects.filter(({ package: npmPackage }) => {
