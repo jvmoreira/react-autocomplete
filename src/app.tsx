@@ -4,6 +4,8 @@ import './style.scss';
 export function App(): ReactElement {
 
   return (
-    <h1>Autocomplete Component</h1>
+    <main className="page-content">
+      <h1 className="page-title">Autocomplete Component</h1>
+    </main>
   );
 }

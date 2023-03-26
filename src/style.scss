@@ -1,16 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&display=swap');
+
+:root {
+  --text-color: white;
+  --border-color: rgba(255, 255, 255, 0.5);
+  --focus-border-color: rgba(255, 255, 255, 0.8);
+  --placeholder-color: rgba(255, 255, 255, .7);
+  --font-family: 'Lato', sans-serif;
+  --background-gradient: linear-gradient(95deg, #8D49F7 0%, #6B53FF 103%);
+}
+
 html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  background: var(--background-gradient);
+
+  ::placeholder {
+    color: var(--placeholder-color);
+  }
 }
 
 *, :before, :after {
-  margin: inherit;
-  padding: inherit;
+  margin: unset;
+  padding: unset;
   box-sizing: inherit;
 }
 
 a {
   color: inherit;
   text-decoration: inherit;
+}
+
+.page-content {
+  width: 80%;
+  margin: auto;
+
+  @media only screen and (min-width: 770px) {
+    max-width: 50%;
+  }
+
+  .page-title {
+    margin-top: 100px;
+    margin-bottom: .8rem;
+  }
 }
