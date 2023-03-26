@@ -5,6 +5,24 @@ import { AutocompleteField } from './autocomplete-field';
 
 const autocompleteFieldPlaceholder = 'Search car makers';
 
+test('updates input value and clears options when user selects an autocomplete option', async () => {
+  const searchValue = 'Ferr';
+  const expectedFinalValue = 'Ferrari';
+
+  const { getByPlaceholderText, getByRole } = renderAutocompleteField();
+  const inputField = getByPlaceholderText(autocompleteFieldPlaceholder);
+  fireEvent.change(inputField, { target: { value: searchValue } });
+
+  await waitFor(() => {
+    expect(getByRole('list')).not.toBeEmptyDOMElement();
+  });
+
+  const listItem = getByRole('listitem');
+  fireEvent.click(listItem);
+  expect(getByPlaceholderText(autocompleteFieldPlaceholder)).toHaveValue(expectedFinalValue);
+  expect(getByRole('list')).toBeEmptyDOMElement();
+});
+
 describe('input field', () => {
   test('renders an input with the defined placeholder', () => {
     const { getByPlaceholderText } = renderAutocompleteField();
