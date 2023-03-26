@@ -1,0 +1,29 @@
+$borderRadius: 3px;
+
+.autocompleteField {
+  &__container {
+    position: relative;
+  }
+
+  &__inputField {
+    padding: 1rem;
+    outline: none;
+    width: 100%;
+    color: white;
+    background-color: transparent;
+    font-size: 1.2rem;
+    font-family: var(--font-family);
+    border: 1px solid var(--border-color);
+    border-radius: $borderRadius;
+
+    &::placeholder {
+      font-weight: 100;
+      color: var(--placeholder-color);
+      font-family: var(--font-family);
+    }
+
+    &:focus {
+      border-color: var(--focus-border-color);
+    }
+  }
+}
