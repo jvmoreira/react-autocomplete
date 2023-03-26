@@ -15,7 +15,10 @@
     "resolveJsonModule": true,
     "jsx": "react",
     "incremental": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["global.d.ts", "declaration.d.ts", "src/**/*"],
   "exclude": ["node_modules", "dist"]

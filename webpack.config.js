@@ -13,6 +13,9 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.css', '.scss'],
+    alias: {
+      '@': path.resolve(process.cwd(), 'src/'),
+    },
   },
   module: {
     rules: [
