@@ -26,4 +26,46 @@ $borderRadius: 3px;
       border-color: var(--focus-border-color);
     }
   }
+
+  &__autocompleteOptions {
+    list-style-type: none;
+    z-index: 10;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    max-height: 300px;
+    overflow: auto;
+    display: flex;
+    &:empty { display: none; }
+    flex-flow: column nowrap;
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 $borderRadius $borderRadius;
+
+    &__option, &__loadingContent {
+      padding: .8rem;
+    }
+
+    &__option {
+      display: flex;
+      flex-flow: column nowrap;
+      &:hover {
+        background-color: rgba(255, 255, 255, .1);
+        cursor: pointer;
+      }
+
+      &__value {
+        font-weight: bold;
+      }
+
+      &__description {
+        margin-top: .3rem;
+        font-size: .8rem;
+      }
+
+      &__highlight {
+        background-color: rgba(255, 255, 255, .3);
+      }
+    }
+  }
 }

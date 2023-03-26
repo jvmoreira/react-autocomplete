@@ -4,6 +4,7 @@ import { AutocompleteContextProvider } from './autocomplete-context';
 import { autocompleteReducer } from './autocomplete-reducer';
 import { AutocompleteFieldContainer } from './components/autocomplete-field-container';
 import { InputField } from './components/input-field';
+import { AutocompleteOptions } from './components/autocomplete-options';
 
 interface AutocompleteInputFieldProps {
   placeholder?: string;
@@ -17,6 +18,7 @@ export function AutocompleteField({ placeholder, fetcher }: AutocompleteInputFie
     <AutocompleteContextProvider value={{ autocompleteState, dispatch }}>
       <AutocompleteFieldContainer>
         <InputField placeholder={placeholder} />
+        <AutocompleteOptions />
       </AutocompleteFieldContainer>
     </AutocompleteContextProvider>
   );

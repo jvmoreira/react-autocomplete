@@ -2,6 +2,10 @@ import { AutocompleteOption } from './autocomplete-fetcher';
 import { buildStringHighlight } from '../string-highlight';
 
 export async function staticCarMakerAutocompleteFetcher(carName: string): Promise<AutocompleteOption[]> {
+  if (carName.length === 0) {
+    return [];
+  }
+
   const fetchResult = await fetchCarMakerData();
 
   const filteredCarMakers = fetchResult.filter(carMaker => carMaker.name.toLowerCase().includes(carName.toLowerCase()));
