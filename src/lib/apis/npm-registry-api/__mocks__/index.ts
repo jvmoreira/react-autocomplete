@@ -47,7 +47,7 @@ export const npmRegistryApi = {
         package: {
           name: '@testing-library/cypress',
           version: '9.0.0',
-          description: 'Simple and complete custom Cypress commands and utilities that encourage good testing practices.',
+          description: undefined,
         },
       },
     ],

@@ -16,31 +16,32 @@ test.each([
 
 test('includes option value, description and key', async () => {
   const packageName = 'react';
-  const autocompleteOptions = await getNpmPackageNameAutocompleteOptions(packageName);
-  expect(autocompleteOptions[0]).toHaveProperty('value', '@testing-library/react');
-  expect(autocompleteOptions[0]).toHaveProperty('key');
-  expect(autocompleteOptions[0].key).toBeString();
-  expect(autocompleteOptions[0].key).not.toBe('');
-  expect(autocompleteOptions[0]).toHaveProperty('description');
-  expect(autocompleteOptions[0].description).toBeString();
-  expect(autocompleteOptions[0].description).not.toBe('');
+  const [autocompleteOption] = await getNpmPackageNameAutocompleteOptions(packageName);
+  expect(autocompleteOption).toHaveProperty('value', '@testing-library/react');
+  expect(autocompleteOption).toHaveProperty('key');
+  expect(autocompleteOption.key).toBeString();
+  expect(autocompleteOption.key).not.toBe('');
+  expect(autocompleteOption).toHaveProperty('description');
+  expect(autocompleteOption.description).toBeString();
+  expect(autocompleteOption.description).not.toBe('');
 });
 
 test('includes highlighted values when both the package name and description contain the search value', async () => {
   const packageName = 'react';
-  const autocompleteOptions = await getNpmPackageNameAutocompleteOptions(packageName);
-  expect(autocompleteOptions[0]).toHaveProperty('highlightedValue.highlight', packageName);
-  expect(autocompleteOptions[0]).toHaveProperty('highlightedDescription.highlight', 'React');
+  const [autocompleteOption] = await getNpmPackageNameAutocompleteOptions(packageName);
+  expect(autocompleteOption).toHaveProperty('highlightedValue.highlight', packageName);
+  expect(autocompleteOption).toHaveProperty('highlightedDescription.highlight', 'React');
 });
 
-test('does not include highlighted name when package name does not contain the search value', async () => {
-  const packageName = 'Simple';
-  const autocompleteOptions = await getNpmPackageNameAutocompleteOptions(packageName);
-  expect(autocompleteOptions[0]).toHaveProperty('highlightedValue', undefined);
+test('does not include description when package description is undefined', async () => {
+  const packageName = 'cypress';
+  const [autocompleteOption] = await getNpmPackageNameAutocompleteOptions(packageName);
+  expect(autocompleteOption).toHaveProperty('description', undefined);
+  expect(autocompleteOption).toHaveProperty('highlightedDescription', undefined);
 });
 
 test('does not include highlighted description when package description does not contain the search value', async () => {
   const packageName = '@testing-library';
-  const autocompleteOptions = await getNpmPackageNameAutocompleteOptions(packageName);
-  expect(autocompleteOptions[0]).toHaveProperty('highlightedDescription', undefined);
+  const [autocompleteOption] = await getNpmPackageNameAutocompleteOptions(packageName);
+  expect(autocompleteOption).toHaveProperty('highlightedDescription', undefined);
 });

@@ -17,5 +17,5 @@ interface NpmRegistryApiSearchResponse {
 interface NpmRegistryApiPackage {
   name: string;
   version: string;
-  description: string;
+  description?: string;
 }

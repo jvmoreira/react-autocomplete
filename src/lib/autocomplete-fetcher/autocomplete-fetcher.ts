@@ -7,7 +7,7 @@ export interface AutocompleteFetcher {
 export interface AutocompleteOption {
   key: string;
   value: string;
-  highlightedValue?: StringHighlight;
-  description: string;
-  highlightedDescription?: StringHighlight;
+  highlightedValue: StringHighlight;
+  description: string | undefined;
+  highlightedDescription: StringHighlight | undefined;
 }
